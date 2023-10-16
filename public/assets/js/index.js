@@ -1,30 +1,8 @@
-const express = require('express');
-const app = express();
-const PORT = process.env.PORT || 3001;
-
 let noteTitle;
 let noteText;
 let saveNoteBtn;
 let newNoteBtn;
 let noteList;
-
-//WORK ON CODE BELOW
-app.get('/notes', (req, res) => {
-  console.log('notes retrieved');
-})
-
-app.get('*', (req, res) => {
-  console.log('index html retrieved');
-})
-
-app.get('/api/notes', (req, res) => {
-  console.log(req);
-  res.json(notes);
-});
-
-//app.post here
-
-//END OF CODE
 
 if (window.location.pathname === '/notes') {
   noteTitle = document.querySelector('.note-title');
