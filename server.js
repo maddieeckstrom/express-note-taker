@@ -9,7 +9,6 @@ const util = require('util');
 app.use(express.json());
 app.use(express.static('public'));
 
-//WORK ON CODE BELOW
 app.get('/api/notes', (req, res) => {
     res.json(notesDb);
 });
@@ -29,10 +28,6 @@ app.post('/api/notes', (req, res) => {
             }
             console.log('Note is in database')
         })
-        //console.log(newNote);
-        //const oneNote = readFileAsync(notesDb);
-        //console.log(jsonFile);
-        //console.log(notesDb);
     }catch(err) {
         console.log(err);
     }
@@ -40,17 +35,11 @@ app.post('/api/notes', (req, res) => {
 })
 
 app.get('/notes', (req, res) => {
-    //console.log('notes retrieved');
     res.sendFile(path.join(__dirname, 'public/notes.html'));
 })
 
 app.get('*', (req, res) => {
-    //console.log('catch all');
     res.sendFile(path.join(__dirname, 'public/index.html'));
 })
-
-  
-//app.post here
-
 
 app.listen(PORT, () => console.log('Successfully connected'));
