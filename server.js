@@ -3,6 +3,8 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 const notesDb = require('./db/db.json');
 const path = require('path');
+const fs = require('fs');
+const util = require('util');
 
 app.use(express.json());
 app.use(express.static('public'));
@@ -13,9 +15,28 @@ app.get('/api/notes', (req, res) => {
 });
 
 app.post('/api/notes', (req, res) => {
-    const newNote = req.body;
-    console.log(newNote);
-    // fsreadFile (stringify), then fs writeFile (parse) to add new object into the array
+    
+    let jsonFilePath= path.join(__dirname, "db/db.json");
+    let newNote = req.body;
+
+    notesDb.push(newNote);
+    console.log(notesDb);
+
+    try{
+        fs.writeFileSync(jsonFilePath, JSON.stringify(notesDb), (err) => {
+            if(err) {
+                return console.log(err);
+            }
+            console.log('Note is in database')
+        })
+        //console.log(newNote);
+        //const oneNote = readFileAsync(notesDb);
+        //console.log(jsonFile);
+        //console.log(notesDb);
+    }catch(err) {
+        console.log(err);
+    }
+    res.json(newNote);
 })
 
 app.get('/notes', (req, res) => {
